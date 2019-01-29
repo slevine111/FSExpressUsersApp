@@ -1,4 +1,4 @@
-const usersHTML = () => {
+const htmlStructure = changedHTML => {
   return `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -9,16 +9,12 @@ const usersHTML = () => {
       <title>Document</title>
     </head>
     <body>
-    <h1><a href = "/">Home</a></h1>
+      <h1><a href = "/">Home</a></h1>
 
-    <p><a href="/users">Users</a></p>
-      <ul>
-      <li><a href="/users/1">Moe</a></li>
-      <li><a href="/users/2">Larry</a></li>
-      <li><a href="/users/3">Curly</a></li>
-      </ul>
-    </body>
+      <p><a href="/users">Users</a></p>
+      ${changedHTML}
+  </body>
   </html>`
 }
 
-module.exports = usersHTML
+module.exports = htmlStructure

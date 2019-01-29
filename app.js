@@ -1,7 +1,5 @@
 const express = require('express')
-const generateHomeHTML = require('./views/UserhomeHTML')
-const generateUsersListHTML = require('./views/UsersListHTML')
-const generateUserProfileHTML = require('./views/UserProfileHTML')
+const generateHTML = require('./views/BaseHTML')
 
 const app = express()
 
@@ -10,11 +8,18 @@ const PORT = 1337
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send(generateHomeHTML())
+  res.send(generateHTML(''))
 })
 
 app.get('/users', (req, res) => {
-  res.send(generateUsersListHTML())
+  res.send(
+    generateHTML(`
+  <ul>
+  <li><a href="/users/1">Moe</a></li>
+  <li><a href="/users/2">Larry</a></li>
+  <li><a href="/users/3">Curly</a></li>
+  </ul>`)
+  )
 })
 app.get('/users/:id', (req, res) => {
   const username =
@@ -23,7 +28,7 @@ app.get('/users/:id', (req, res) => {
       : Number(req.params.id) === 2
       ? 'Larry'
       : 'Curly'
-  res.send(generateUserProfileHTML(username))
+  res.send(generateHTML(`<div> ${username} </div>`))
 })
 
 app.listen(PORT, () => {
